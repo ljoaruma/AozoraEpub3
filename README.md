@@ -72,6 +72,9 @@ Windowsの場合はOperating System：Windows、Architecture：x64、Package Typ
 
 使い方
 ------------
+#### ビルド
+  ant -f ant.xml
+
 #### インストール
 　AozoraEpub3-*.zip を任意のフォルダに解凍します。
 
