@@ -73,6 +73,9 @@ Windowsの場合はOperating System：Windows、Architecture：x64、Package Typ
 使い方
 ------------
 
+#### ビルド
+  ant -f ant.xml
+
 #### インストーラー版(Windows)
 
 **AozoraEpub3-Setup-*.exe** を実行してインストールします。  
