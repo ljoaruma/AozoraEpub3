@@ -574,12 +574,26 @@ public class WebAozoraConverter
                     //パターンがあればマッチング
                     ExtractInfo extractInfo = this.queryMap.get(ExtractId.HREF)[0];
                     if (!extractInfo.hasPattern() || extractInfo.matches(hrefString)) {
-                        String chapterHref = hrefString;
-                        if (!hrefString.startsWith("http")) {
-                            if (hrefString.charAt(0) == '/') chapterHref = baseUri + hrefString;
-                            else chapterHref = listBaseUrl + hrefString;
+                        String chapterHref;
+                        try {
+                            if (hrefString.startsWith("http")) {
+                                // すでにフルURLの場合は、そのまま正規化（./ などを除去）
+                                chapterHref = new URI(hrefString).normalize().toString();
+                            } else if (hrefString.charAt(0) == '/') {
+                                // ルート相対パス（/から始まる）をベースURIに対して解決
+                                chapterHref = new URI(baseUri).resolve(hrefString).toString();
+                            } else {
+                                // 相対パス（./ やフォルダ名から始まる）を現在のURLに対して解決
+                                chapterHref = new URI(listBaseUrl).resolve(hrefString).toString();
+                            }
+
+                            chapterHrefs.add(chapterHref);
+
+                        } catch (Exception e) {
+                            // URLの形式が不正だった場合のパースエラー対策
+                            System.err.println("URLの解析に失敗しました: " + hrefString);
+                            e.printStackTrace();
                         }
-                        chapterHrefs.add(chapterHref);
                     }
                 }
 
