@@ -21,13 +21,13 @@ AUTHOR	#maind .ss a:0
 DESCRIPTION	#maind .ss:1
 
 ## 各話へのリンク cssQuery
-HREF	table a
+HREF	.episode-list__link
 
 ##一覧に記載されている各話の更新日時
-SUB_UPDATE	#maind .ss table nobr
+SUB_UPDATE	.episode-list__date
 
 ##一覧ページのタイトル (本文側に無ければこれを利用)
-SUBTITLE_LIST	#maind .ss td a
+SUBTITLE_LIST	.episode-list__title
 
 ################################
 ###各話の抽出設定
