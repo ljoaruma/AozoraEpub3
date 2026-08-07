@@ -12,7 +12,7 @@ import java.util.Properties;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.help.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.compress.archivers.ArchiveEntry;
@@ -82,22 +82,23 @@ public class AozoraEpub3
 
 			CommandLineParser parser = new DefaultParser();
 			CommandLine commandLine;
+			HelpFormatter helpFormatter = HelpFormatter.builder().get();
 			try {
 				commandLine = parser.parse(options, args, true);
 			} catch (ParseException e) {
-				new HelpFormatter().printHelp(helpMsg, options);
+				helpFormatter.printHelp(helpMsg, null,	options,null,true );
 				return;
 			}
-			//オプションの後ろをファイル名に設定
+			// オプションの後ろをファイル名に設定
 			String[] fileNames = commandLine.getArgs();
 			if (fileNames.length == 0) {
-				new HelpFormatter().printHelp(helpMsg, options);
+				helpFormatter.printHelp(helpMsg, null,	options,null,true );
 				return;
 			}
 
-			//ヘルプ出力
-			if (commandLine.hasOption('h') ) {
-				new HelpFormatter().printHelp(helpMsg, options);
+			// ヘルプ出力
+			if (commandLine.hasOption('h')) {
+				helpFormatter.printHelp(helpMsg, null,	options,null,true );
 				return;
 			}
 			//iniファイル確認
