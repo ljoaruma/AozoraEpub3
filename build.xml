@@ -16,10 +16,11 @@
         <fileset dir="${dir.lib}" includes="*.jar" />
     </path>
 
-    <target name="clean">
+    <target name="clean.classes">
         <delete dir="${dir.classes}" />
     </target>
 
+    <!--
     <target name="compile">
         <mkdir dir="${dir.classes}"/>
         <javac 
@@ -28,8 +29,10 @@
             destdir="${dir.classes}"
             includeAntRuntime="false" />
     </target>
+    -->
 
-    <target name="create_run_jar" depends="compile">
+      <!-- <target name="create_run_jar" depends="compile"> -->
+    <target name="create_run_jar">
         <delete dir="${dir.jarfile}"/>
         <mkdir dir="${dir.jarfile}"/>
         <mkdir dir="${dir.jarfile}/lib"/>
